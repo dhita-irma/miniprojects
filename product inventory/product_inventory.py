@@ -18,9 +18,9 @@ class Inventory:
     def __init__(self):
         self.productlist = []
 
-    def add_product(self, price, idnum, quantity):
+    def add_product(self, name, idnum, price, quantity):
         """Add a new product to the list"""
-        self.productlist.append(Product(price, idnum, quantity))
+        self.productlist.append(Product(name, idnum, price, quantity))
         return self.productlist
 
     def product_quantity(self, product_name):
@@ -35,12 +35,18 @@ class Inventory:
     def display_product(self):
         """Display all of the products with the ID number and the quantity"""
         for product in self.productlist:
-            print(f"{product.idnum} - {product.price} - {product.quantity}")
+            print(f"{product.name} - {product.idnum} - {product.price} - {product.quantity}")
+
+    def inventory_value(self):
+        total_value = 0
+        for product in self.productlist:
+            total_value += (product.price * product.quantity)
+        return print(f"Total inventory value is: {total_value}")
 
 
-
-
-inventory1 = Inventory()
-inventory1.add_product(50000, "A001", 12)
-inventory1.add_product(25000, "B001", 54)
-inventory1.display_product()
+inventory = Inventory()
+inventory.add_product("Notebook", "S001", 3000, 200)
+inventory.add_product("Pencil", "S002", 2000, 55)
+inventory.add_product("Pen", "S003", 2500, 60)
+inventory.display_product()
+inventory.inventory_value()
