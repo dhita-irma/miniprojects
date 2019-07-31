@@ -1,2 +1,2 @@
-# practice-projects
-Small projects on Python
+# miniprojects
+A collection of mini projects in Python
