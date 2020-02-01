@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block main %}
+
+    <h1 class="mb-3">
+        List of Students
+    </h1>
+
+    <table class="table table-sm">
+
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Dormitory</th>
+          <th scope="col">Club</th>
+        </tr>
+      </thead>
+
+      <tbody>
+            {% for r in range(row_count) %}
+            <tr>
+                <th scope="row">{{ r+1 }}</th>
+                    <td>{{ students[r][0] }}</td>
+                    <td>{{ students[r][2] }}</td>
+                    <td>{{ students[r][3] }}</td>
+            </tr>
+            {% endfor %}
+      </tbody>
+    </table>
+{% endblock %}
