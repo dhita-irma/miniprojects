@@ -6,11 +6,8 @@ from flask import Flask, jsonify, redirect, render_template, request, url_for
 # Configure application
 app = Flask(__name__)
 
-
 # Reload templates when they are changed
 app.config["TEMPLATES_AUTO_RELOAD"] = True
-
-students = ["Henry", "Harry", "Ron"]
 
 @app.after_request
 def after_request(response):

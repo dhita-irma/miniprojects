@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1de81bfc-b592-47ef-8e4e-30915d02c3e2" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student-form/application.py" beforeDir="false" afterPath="$PROJECT_DIR$/student-form/application.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/student-form/templates/form.html" beforeDir="false" afterPath="$PROJECT_DIR$/student-form/templates/form.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -12,9 +14,30 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Documents/Computer Science/CS50/pset7/similarities/test.py">
           <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/student-form/application.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/student-form/templates/form.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="584">
+              <caret line="102" column="57" lean-forward="true" selection-start-line="102" selection-start-column="57" selection-end-line="102" selection-end-column="57" />
+            </state>
+          </provider>
         </entry>
       </file>
     </leaf>
@@ -39,21 +62,21 @@
         <option value="$PROJECT_DIR$/whatsapp automation/test.py" />
         <option value="$PROJECT_DIR$/whatsapp automation/whatsapp0.py" />
         <option value="$PROJECT_DIR$/../test.py" />
+        <option value="$PROJECT_DIR$/student-form/application.py" />
+        <option value="$PROJECT_DIR$/student-form/templates/form.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="952" />
-    <option name="y" value="-8" />
-    <option name="width" value="976" />
-    <option name="height" value="1066" />
+    <option name="x" value="-7" />
+    <option name="width" value="974" />
+    <option name="height" value="1087" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -64,12 +87,19 @@
             <path>
               <item name="miniprojects" type="b2602c69:ProjectViewProjectNode" />
               <item name="miniprojects" type="462c0819:PsiDirectoryNode" />
-              <item name="whatsapp automation" type="462c0819:PsiDirectoryNode" />
+              <item name="student-form" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="miniprojects" type="b2602c69:ProjectViewProjectNode" />
+              <item name="miniprojects" type="462c0819:PsiDirectoryNode" />
+              <item name="student-form" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -223,9 +253,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="952" y="-8" width="976" height="1066" extended-state="0" />
+    <frame x="-7" y="0" width="974" height="1087" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31449893" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.31517094" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -314,6 +345,26 @@
     </entry>
     <entry file="file://$USER_HOME$/Documents/Computer Science/CS50/pset7/similarities/test.py">
       <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/student-form/templates/table.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/student-form/application.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="9" column="42" selection-start-line="9" selection-start-column="42" selection-end-line="9" selection-end-column="42" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/student-form/templates/form.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="584">
+          <caret line="102" column="57" lean-forward="true" selection-start-line="102" selection-start-column="57" selection-end-line="102" selection-end-column="57" />
+        </state>
+      </provider>
     </entry>
   </component>
 </project>
