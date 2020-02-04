@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Quoted
+{% endblock %}
+
+{% block main %}
+    <div class="alert alert-primary" role="alert">
+      A share of <b>{{ value["name"] }}</b> ({{ value["symbol"] }}) costs {{ value["price"] }}
+    </div>
+{% endblock %}
