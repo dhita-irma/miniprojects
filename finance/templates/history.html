@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    History
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Symbol</th>
+          <th scope="col">Shares</th>
+          <th scope="col">Price</th>
+          <th scope="col">Transacted</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for i in range(purchases_count) %}
+          <tr>
+            <td>{{ purchases[i].symbol }}</td>
+            <td>{{ purchases[i].share }}</td>
+            <td>{{ purchases[i].price }}</td>
+            <td>{{ purchases[i].date }}</td>
+          </tr>
+        {% endfor %}
+
+      </tbody>
+    </table>
+{% endblock %}

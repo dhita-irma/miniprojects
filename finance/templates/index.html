@@ -1,0 +1,46 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portofolio
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Symbol</th>
+          <th scope="col">Name</th>
+          <th scope="col">Shares</th>
+          <th scope="col">Price</th>
+          <th scope="col">TOTAL</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        {% for i in range(len_stocks) %}
+          <tr>
+            <td>{{ stocks[i].symbol }}</td>
+            <td>{{ stocks[i].name }}</td>
+            <td>{{ purchases[i]["SUM(share)"] }}</td>
+            <td>{{ usd(stocks[i].price) }}</td>
+            <td>{{ usd(purchases[i]["SUM(share)"] * stocks[i].price) }}</td>
+          </tr>
+        {% endfor %}
+
+          <tr>
+            <td>CASH</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{ usd(cash) }}</td>
+          </tr>
+          <tr>
+            <th scope="row"></th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><b> {{ usd(total_value + cash) }}  </b></td>
+          </tr>
+      </tbody>
+    </table>
+{% endblock %}
