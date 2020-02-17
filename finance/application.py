@@ -23,6 +23,7 @@ def after_request(response):
     response.headers["Pragma"] = "no-cache"
     return response
 
+
 # Custom filter
 #app.jinja_env.filters["usd"] = usd
 app.jinja_env.globals.update(usd=usd)
@@ -47,7 +48,8 @@ def index():
     """Show portfolio of stocks"""
 
     user_id = session["user_id"]
-    purchases = db.execute("SELECT symbol, SUM(share) FROM purchases WHERE id = :user_id GROUP BY symbol HAVING SUM(share) > 0", user_id=user_id)
+    purchases = db.execute(
+        "SELECT symbol, SUM(share) FROM purchases WHERE id = :user_id GROUP BY symbol HAVING SUM(share) > 0", user_id=user_id)
     cash = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=user_id)[0]["cash"]
 
     # List of all stocks owned by the user {name: name, price: price, symbol: symbol}
@@ -75,26 +77,30 @@ def buy():
     else:
         # Check if the input is valid
         symbol = request.form.get("symbol")
-        shares = int(request.form.get("shares"))
+        shares = request.form.get("shares")
         if not symbol:
             return apology("Symbol cannot be empty")
         elif not lookup(symbol):
             return apology("Symbol does not exist")
         elif not shares:
             return apology("Shares cannot be empty")
-        elif not str(shares).isdigit() or shares < 1:
+        elif shares.isdigit() == False:
+            return apology("Number of share is invalid")
+        elif int(shares) < 0:
             return apology("Number of share is invalid")
 
         # Add stock to user's portofolio
+        shares = int(shares)
         price = lookup(symbol)["price"]
         proper_sym = lookup(symbol)["symbol"]
         name = lookup(symbol)["name"]
-        row = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id = session["user_id"])
+        row = db.execute("SELECT cash FROM users WHERE id = :user_id", user_id=session["user_id"])
         cash = row[0]["cash"]
         if cash >= (price*shares):
             db.execute("INSERT INTO purchases (id, symbol, price, share) VALUES (:user_id, :symbol, :price, :shares)",
-                        user_id=session["user_id"], symbol=proper_sym, price=price, shares=shares)
-            db.execute("UPDATE users SET cash = cash - :spending WHERE id=:user_id", spending=price*shares, user_id=session["user_id"])
+                       user_id=session["user_id"], symbol=proper_sym, price=price, shares=shares)
+            db.execute("UPDATE users SET cash = cash - :spending WHERE id=:user_id",
+                       spending=price*shares, user_id=session["user_id"])
             return redirect("/")
         else:
             return apology("You don't have enough cash")
@@ -103,7 +109,14 @@ def buy():
 @app.route("/check", methods=["GET"])
 def check():
     """Return true if username available, else false, in JSON format"""
-    return jsonify("TODO")
+    username = request.args.get("username")
+
+    uname_data = db.execute("SELECT * FROM users WHERE username = :username", username=username)
+
+    if len(username) > 1 and not uname_data:
+        return jsonify(True)
+    else:
+        return jsonify(False)
 
 
 @app.route("/history")
@@ -179,7 +192,7 @@ def quote():
     else:
         value = lookup(request.form.get("symbol"))
         if not value:
-            return apology("Symbol does not exist")
+            return apology("Invalid symbol")
         else:
             return render_template("quoted.html", value=value)
 
@@ -210,10 +223,10 @@ def register():
 
         # Check if username is taken, if not insert user to database
         uname_data = db.execute("SELECT * FROM users WHERE username = :username",
-                          username=username)
+                                username=username)
         if not uname_data:
             db.execute("INSERT INTO users (username, hash) VALUES (:username, :hash)",
-                username=username, hash=generate_password_hash(password))
+                       username=username, hash=generate_password_hash(password))
 
             # Remember user session
             rows = db.execute("SELECT * FROM users WHERE username = :username",
@@ -222,8 +235,7 @@ def register():
             return redirect("/")
 
         else:
-           return apology("Username is taken")
-
+            return apology("Username is taken")
 
 
 @app.route("/sell", methods=["GET", "POST"])
@@ -232,8 +244,9 @@ def sell():
     """Sell shares of stock"""
 
     user_id = session["user_id"]
-    if request.method=="GET":
-        purchases = db.execute("SELECT symbol, SUM(share) FROM purchases WHERE id = :user_id AND share > 0 GROUP BY symbol", user_id=user_id)
+    if request.method == "GET":
+        purchases = db.execute(
+            "SELECT symbol, SUM(share) FROM purchases WHERE id = :user_id AND share > 0 GROUP BY symbol", user_id=user_id)
         return render_template("sell.html", purchases=purchases)
 
     else:
@@ -252,12 +265,42 @@ def sell():
 
         # Add transaction to 'purchases' table
         db.execute("INSERT INTO purchases (id, symbol, price, share) VALUES (:user_id, :symbol, :price, :shares)",
-                        user_id=user_id, symbol=symbol, price=price, shares=-shares)
+                   user_id=user_id, symbol=symbol, price=price, shares=-shares)
 
         # Update user's cash
         db.execute("UPDATE users SET cash = cash + :sold WHERE id=:user_id", sold=price*shares, user_id=user_id)
 
         return redirect("/")
+
+
+@app.route("/account", methods=["GET", "POST"])
+@login_required
+def account():
+    """Change password"""
+
+    user_id = session["user_id"]
+
+    # User reached route via GET (as by clicking a link or via redirect)
+    if request.method == "GET":
+        return render_template("account.html")
+
+    # User reached route via POST (as by submitting a form via POST)
+    else:
+        old_pass = request.form.get("oldPassword")
+        new_pass = request.form.get("newPassword")
+        confirmation = request.form.get("confirmation")
+
+        current_pass = db.execute("SELECT hash FROM users WHERE id = :user_id", user_id=user_id)[0]["hash"]
+
+        if check_password_hash(current_pass, old_pass):
+            if new_pass == confirmation:
+                db.execute("UPDATE users SET hash = :new_pass WHERE id = :user_id",
+                           new_pass=generate_password_hash(new_pass), user_id=user_id)
+                return render_template("pass.html", message="Password has been changed successfully")
+            else:
+                return render_template("pass.html", message="New password does not match")
+        else:
+            return render_template("pass.html", message="Old password is invalid")
 
 
 def errorhandler(e):
