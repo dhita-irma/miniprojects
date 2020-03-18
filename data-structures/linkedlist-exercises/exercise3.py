@@ -37,9 +37,9 @@ class LinkedList:
         """Find an element that contains value, return True if value exists and
             return False if value doesn't not exist."""
         current = self.head
-        while current.value != value and current.next:
+        while current.value.lower() != value.lower() and current.next:
             current = current.next
-        print(current.value == value)
+        return current.value.lower() == value.lower()
 
 
 if __name__ == '__main__':
@@ -50,5 +50,8 @@ if __name__ == '__main__':
     list0.append('JavaScript')
     list0.append('C')
 
-    list0.find('Java')
-    list0.find('C++')
+    lang = input("Enter a programming language: ")
+    if list0.find(lang):
+        print(f"{lang} is in the list")
+    else:
+        print(f"{lang} is not in the list")
