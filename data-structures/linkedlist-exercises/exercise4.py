@@ -28,9 +28,9 @@ class LinkedList:
         """Print all of the elements in the list"""
         current = self.head
         while current:
-            print(current.value)
+            value = current.value
             current = current.next
-        print(f"Linked list size = {str(self.count)}")
+            yield value
 
     def find(self, value):
         """Find an element that contains value, return True if value exists and
