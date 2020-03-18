@@ -14,6 +14,7 @@ class LinkedList:
         self.count = 0
 
     def append(self, value):
+        """Add an item to the end of the list."""
         new_item = Node(value)
         if not self.head:
             self.head = new_item
@@ -24,6 +25,7 @@ class LinkedList:
         self.count += 1
 
     def iterate(self):
+        """Print all of the elements in the list"""
         current = self.head
         while current:
             print(current.value)

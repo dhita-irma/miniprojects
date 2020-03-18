@@ -15,6 +15,7 @@ class LinkedList:
         self.count = 0
 
     def append(self, value):
+        """Add an item to the end of the list."""
         new_item = Node(value)
         if not self.head:
             self.head = new_item
@@ -25,6 +26,7 @@ class LinkedList:
         self.count += 1
 
     def iterate(self):
+        """Print all of the elements in the list"""
         current = self.head
         while current:
             print(current.value)
@@ -32,6 +34,8 @@ class LinkedList:
         print(f"Linked list size = {str(self.count)}")
 
     def find(self, value):
+        """Find an element that contains value, return True if value exists and
+            return False if value doesn't not exist."""
         current = self.head
         while current.value != value and current.next:
             current = current.next
