@@ -71,13 +71,30 @@ class LinkedList:
         current.next = new_item
 
     def pop_head(self):
-        """Delete the first item from a list"""
+        """Delete the first item of a list"""
         if self.count == 1:
             self.head = None
             self.tail = None
             self.count = 0
         else:
             self.head = self.head.next
+            self.count -= 1
+
+    def pop_tail(self):
+        """Delete the last item of a list"""
+        if self.count == 1:
+            self.head = None
+            self.tail = None
+            self.count = 0
+        else:
+            current = self.head
+            current_index = 0
+            while current_index != self.count-2:
+                current = current.next
+                current_index += 1
+
+            self.tail = current
+            current.next = None
             self.count -= 1
 
 
@@ -88,8 +105,9 @@ if __name__ == '__main__':
     list0.append('Java')            # 1
     list0.append('JavaScript')      # 2
     list0.append('C')               # 3
+    list0.append('C++')             # 4
 
-    list0.pop_head()
+    list0.pop_tail()
 
     for value in list0.iterate():
         print(value)
