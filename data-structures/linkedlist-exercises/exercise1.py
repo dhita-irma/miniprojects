@@ -27,3 +27,13 @@ class LinkedList:
         while current:
             print(current.value)
             current = current.next
+
+
+if __name__ == '__main__':
+
+    list0 = LinkedList()
+    list0.append('Python')
+    list0.append('Java')
+    list0.append('JavaScript')
+
+    list0.iterate()
