@@ -1,4 +1,6 @@
 # Write a Python program to set a new value of an item in a singly linked list using index value.
+# Write a Python program to delete the first item from a singly linked list.
+# Write a Python program to delete the last item from a singly linked list.
 
 
 class Node:
@@ -68,6 +70,16 @@ class LinkedList:
         new_item.next = current.next.next
         current.next = new_item
 
+    def pop_head(self):
+        """Delete the first item from a list"""
+        if self.count == 1:
+            self.head = None
+            self.tail = None
+            self.count = 0
+        else:
+            self.head = self.head.next
+            self.count -= 1
+
 
 if __name__ == '__main__':
 
@@ -77,7 +89,7 @@ if __name__ == '__main__':
     list0.append('JavaScript')      # 2
     list0.append('C')               # 3
 
-    list0.set_value_at_index('Ruby', 2)
+    list0.pop_head()
 
     for value in list0.iterate():
         print(value)
