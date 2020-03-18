@@ -1,121 +1,110 @@
 class Node:
-    def __init__(self, value, next_node=None):
+    def __init__(self, value, next=None):
         self.value = value
-        self.next = next_node
+        self.next = next
 
 
 class LinkedList:
     def __init__(self):
         self.head = None
+        self.tail = None
         self.total = 0
 
     def add(self, value):
-        """ Add to the end of the list """
-        new_element = Node(value)
-        if not self.head:
-            self.head = new_element
-        else:
-            current = self.head
-            while current.next:  # while my current has a next Node
-                current = current.next
-            # add the element to the last node in the list
-            current.next = new_element
-
-        self.total += 1  # update total
+        """Add an element to the end of the list."""
+        new_item = Node(value)
+        if not self.head:  # If there is no element in the list
+            self.head = new_item
+            self.tail = new_item
+        else:              # If there are elements in the list
+            self.tail = new_item
+        self.total += 1
 
     def pop(self):
-        """ Remove the end of the list """
+        """Remove the last element of the list and return the value of the popped element."""
         if not self.head:
             return None
 
-        # if there is only one element
+        # If there is only one element
         if self.total == 1:
-            value = self.head.value
-            self.head = None  # removing the only element in the list
+            self.head = None # Removing the only element in the list
             self.total = 0
-            return value
 
-            # loop through and find last element
-        current = self.head
-        while current.next.next:  # find second to last element
-            current = current.next
+        # Loop through and find the last element
+        current_item = self.head
+        while current_item.next.next:          #Find second to last element
+            current_item = current_item.next
 
-        value = current.next.value
-        current.next = None
+        value = current_item.value
+        current_item.next = None
         self.total -= 1
         return value
 
-    def get_at_index(self, i):
-        """ return element at index i """
+    def get_value(self, i):
+        """Return element at the index i"""
         if i >= self.total or i < 0:
             raise IndexError
 
+        current_item = self.head
         current_index = 0
-        current = self.head
         while current_index != i:
-            current = current.next
+            current_item = current_item.next
             current_index += 1
+        return current_item.value
 
-        return current.value
-
-    def insert_at_index(self, i, value):
-        """ insert an element at a certain index i """
-
+    def insert(self, i, value):
+        """Insert an element at index i"""
         if i > self.total or i < 0:
             raise IndexError
 
-        if i == self.total:
-            self.add(value)
-            return
-
+        current_item = self.head
         current_index = 0
-        current = self.head
-        while current_index != i - 1:  # make current is element before i
-            current = current.next
+        while current_index != i - 1:
+            current_item = current_item.next
             current_index += 1
 
-        # current = element at index i - 1
-        # current.next = element at index i (we are going to move it to i + 1)
-        new_node = Node(value)
-        new_node.next = current.next  # what ever is at index i now will be i + 1
-        current.next = new_node  # make i-1.next  = new node
+        new_item = Node(value)
+        new_item.next = current_item.next
+        current_item.next = new_item
         self.total += 1
 
     def remove_at_index(self, i):
-        """ remove an element at index i """
+        """Remove element at index i"""
         if i >= self.total or i < 0:
             raise IndexError
 
-        if i == self.total:
-            self.pop()
-            return
-
+        current_item = self.head
         current_index = 0
-        current = self.head
-        while current_index != i - 1:  # make current is element before i
-            current = current.next
+        while current_index != i - 1:
+            current_item = current_item.next
             current_index += 1
 
-        node_at_i_plus_1 = current.next.next  # element at i + 1
-        current.next = node_at_i_plus_1
+        current_item.next = current_item.next.next
+        self.total -= 1
+
+    def remove_value(self, value):
+        """Remove the first element that contains value"""
+        current_item = self.head
+        while current_item.next.value != value:  # Find the element before the element that contains said value
+            current_item = current_item.next
+
+        current_item.next = current_item.next.next
         self.total -= 1
 
     def count(self):
-        """ get total number of elements inside the list """
+        """Return the total element in the list."""
         return self.total
 
     def find(self, value):
-        """ return the index of the first element that contains the value,
-            or None is doesnt exist
-        """
-
-        if self.total == 0:
+        """Return the index of the first element that contains value
+            Return None if element doesn't exist."""
+        if self.total == 0
             return None
 
-        i = 0
-        current = self.head
-        while current and current.value != value:
-            current = current.next
-            i += 1
+        current_item = self.head
+        current_index = 0
+        while current_item and current_item.value != value:
+            current_item = current_item.next
+            current_index += 1
 
-        return i if current else None
+        return current_index if current_item else None
