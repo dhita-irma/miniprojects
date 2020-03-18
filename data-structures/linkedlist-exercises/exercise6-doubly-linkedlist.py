@@ -1,11 +1,15 @@
 # Write a Python program to create a doubly linked list, append some items and iterate through the list (print forward)
+# Print nodes from current position to first
+# count the number of items of a given doubly linked list
+# print a given doubly linked list in reverse order
+# insert an item in front of a given doubly linked list
 
 
 class Node:
-    def __init__(self, value, next=None, prev=None):
-        self.value = value
-        self.next = next
-        self.prev = prev
+    def __init__(self, val):
+        self.value = val
+        self.next = None
+        self.prev = None
 
 
 class DLinkedList:
@@ -27,11 +31,23 @@ class DLinkedList:
         self.count += 1
 
     def iterate(self):
+        """Iterate through a list"""
         current = self.head
         while current:
             val = current.value
             current = current.next
             yield val
+
+    def reverse_order(self):
+        """Print value from the current position to the first"""
+        current = self.tail
+        while current:
+            val = current.value
+            current = current.prev
+            yield val
+
+    def count(self):
+        return self.count
 
 
 if __name__ == '__main__':
@@ -43,5 +59,5 @@ if __name__ == '__main__':
     list1.append('C')           # 3
     list1.append('C++')         # 4
 
-    for value in list1.iterate():
+    for value in list1.reverse_order():
         print(value)
