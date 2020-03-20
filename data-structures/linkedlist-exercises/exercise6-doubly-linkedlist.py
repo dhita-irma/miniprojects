@@ -62,13 +62,11 @@ class DLinkedList:
     def count(self):
         return self.count
 
-    def remove(self, i):
-        """Delete an item on index i"""
+    def delete_item(self, val):
+        """Delete a specific item from a list"""
         current = self.head
-        current_index = 0
-        while current_index != i:
+        while current and current.value != val:
             current = current.next
-            current_index += 1
 
         current.prev.next = current.next
         current.next.prev = current.prev
@@ -84,7 +82,7 @@ if __name__ == '__main__':
     list1.append('C')           # 3
     list1.append('C++')         # 4
 
-    list1.remove(1)
+    list1.delete_item('Java')
 
     for value in list1.iterate():
         print(value)
