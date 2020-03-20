@@ -3,6 +3,7 @@
 # count the number of items of a given doubly linked list
 # print a given doubly linked list in reverse order
 # insert an item in front of a given doubly linked list
+# delete a specific item from a given doubly linked list
 
 
 class Node:
@@ -61,6 +62,18 @@ class DLinkedList:
     def count(self):
         return self.count
 
+    def remove(self, i):
+        """Delete an item on index i"""
+        current = self.head
+        current_index = 0
+        while current_index != i:
+            current = current.next
+            current_index += 1
+
+        current.prev.next = current.next
+        current.next.prev = current.prev
+        self.count -= 1
+
 
 if __name__ == '__main__':
 
@@ -71,7 +84,7 @@ if __name__ == '__main__':
     list1.append('C')           # 3
     list1.append('C++')         # 4
 
-    list1.insert('Ruby')
+    list1.remove(1)
 
     for value in list1.iterate():
         print(value)
