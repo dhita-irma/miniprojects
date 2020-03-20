@@ -18,9 +18,9 @@ class DLinkedList:
         self.tail = None
         self.count = 0
 
-    def append(self, value):
+    def append(self, val):
         """Add an item to the end of the list"""
-        new_item = Node(value)
+        new_item = Node(val)
         if self.count == 0:
             self.head = new_item
             self.tail = new_item
@@ -28,6 +28,18 @@ class DLinkedList:
             self.tail.next = new_item
             new_item.prev = self.tail
             self.tail = new_item
+        self.count += 1
+
+    def insert(self, val):
+        """Insert an item in front of the list"""
+        new_item = Node(val)
+        if self.count == 0:
+            self.head = new_item
+            self.tail = new_item
+        else:
+            new_item.next = self.head.next
+            self.head.next.prev = new_item
+            self.head = new_item
         self.count += 1
 
     def iterate(self):
@@ -59,5 +71,7 @@ if __name__ == '__main__':
     list1.append('C')           # 3
     list1.append('C++')         # 4
 
-    for value in list1.reverse_order():
+    list1.insert('Ruby')
+
+    for value in list1.iterate():
         print(value)
