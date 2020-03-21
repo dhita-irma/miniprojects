@@ -1,7 +1,7 @@
 class Node:
-    def __init__(self, value, next=None):
+    def __init__(self, value):
         self.value = value
-        self.next = next
+        self.next = None
 
 
 class LinkedList:
@@ -13,10 +13,11 @@ class LinkedList:
     def add(self, value):
         """Add an element to the end of the list."""
         new_item = Node(value)
-        if not self.head:  # If there is no element in the list
+        if not self.head:           # If there is no element in the list
             self.head = new_item
             self.tail = new_item
-        else:              # If there are elements in the list
+        else:                       # If there are elements in the list
+            self.tail.next = new_item
             self.tail = new_item
         self.total += 1
 
