@@ -60,20 +60,25 @@ class LinkedList:
             current_index += 1
         return current_item.value
 
-    def insert(self, i, value):
+    def insert(self, value, i):
         """Insert an element at index i"""
         if i > self.count or i < 0:
             raise IndexError
 
-        current_item = self.head
-        current_index = 0
-        while current_index != i - 1:
-            current_item = current_item.next
-            current_index += 1
-
         new_item = Node(value)
-        new_item.next = current_item.next
-        current_item.next = new_item
+        if i == self.count-1:
+            self.tail.next = new_item
+            self.tail = new_item
+        else:
+            current = self.head
+            current_index = 0
+            while current_index != i - 1:
+                current = current.next
+                current_index += 1
+
+            new_item.next = current.next
+            current.next = new_item
+
         self.count += 1
 
     def remove_at_index(self, i):
