@@ -97,11 +97,15 @@ class LinkedList:
 
     def remove_value(self, value):
         """Remove the first element that contains value"""
-        current_item = self.head
-        while current_item.next.value != value:  # Find the element before the element that contains said value
-            current_item = current_item.next
+        current = self.head
+        # Find the element before the element that contains said value
+        while current and current.next.value != value:
+            current = current.next
 
-        current_item.next = current_item.next.next
+        if current == self.head:
+            self.head = self.head.next
+        else:
+            current.next = current.next.next
         self.count -= 1
 
     def count(self):
@@ -111,7 +115,7 @@ class LinkedList:
     def find(self, value):
         """Return the index of the first element that contains value
             Return None if element doesn't exist."""
-        if self.count == 0
+        if self.count == 0:
             return None
 
         current_item = self.head
