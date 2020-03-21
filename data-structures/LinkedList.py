@@ -39,7 +39,7 @@ class LinkedList:
         # If there are more than 1 element in the list
         else:
             current = self.head
-            while current.next.next: #Find second to last element
+            while current.next.next:  # Find second to last element
                 current = current.next
 
             value = current.value
