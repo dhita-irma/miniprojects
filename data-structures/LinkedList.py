@@ -23,23 +23,30 @@ class LinkedList:
 
     def pop(self):
         """Remove the last element of the list and return the value of the popped element."""
+
+        # If there is no element in the list
         if not self.head:
             return None
 
-        # If there is only one element
-        if self.count == 1:
-            self.head = None # Removing the only element in the list
+        # If there is only 1 element in the list
+        elif self.count == 1:
+            value = self.head.value
+            self.head = None
+            self.tail = None
             self.count = 0
+            return value
 
-        # Loop through and find the last element
-        current_item = self.head
-        while current_item.next.next:          #Find second to last element
-            current_item = current_item.next
+        # If there are more than 1 element in the list
+        else:
+            current = self.head
+            while current.next.next: #Find second to last element
+                current = current.next
 
-        value = current_item.value
-        current_item.next = None
-        self.count -= 1
-        return value
+            value = current.value
+            current.next = None
+            self.tail = current
+            self.count -= 1
+            return value
 
     def get_value(self, i):
         """Return element at the index i"""
