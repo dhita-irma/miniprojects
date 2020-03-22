@@ -66,9 +66,12 @@ class LinkedList:
             raise IndexError
 
         new_item = Node(value)
-        if i == self.count-1:
+        if i == self.count:
             self.tail.next = new_item
             self.tail = new_item
+        elif i == 0:
+            new_item.next = self.head
+            self.head = new_item
         else:
             current = self.head
             current_index = 0
@@ -86,27 +89,36 @@ class LinkedList:
         if i >= self.count or i < 0:
             raise IndexError
 
-        current_item = self.head
-        current_index = 0
-        while current_index != i - 1:
-            current_item = current_item.next
-            current_index += 1
+        if i == 0:
+            self.head = self.head.next
+            self.count -= 1
+        elif i == self.count-1:
+            self.pop()
+        else:
+            current_item = self.head
+            current_index = 0
+            while current_index != i - 1:
+                current_item = current_item.next
+                current_index += 1
 
-        current_item.next = current_item.next.next
-        self.count -= 1
+            current_item.next = current_item.next.next
+            self.count -= 1
 
     def remove_value(self, value):
         """Remove the first element that contains value"""
-        current = self.head
-        # Find the element before the element that contains said value
-        while current and current.next.value != value:
-            current = current.next
-
-        if current == self.head:
-            self.head = self.head.next
+        if self.head.value == value:
+            self.remove_at_index(0)
+        elif self.tail.value == value:
+            self.pop()
         else:
+            current = self.head
+
+            # Find the element before the element that contains said value
+            while current and current.next.value != value:
+                current = current.next
+
             current.next = current.next.next
-        self.count -= 1
+            self.count -= 1
 
     def count(self):
         """Return the total element in the list."""
