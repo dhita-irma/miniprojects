@@ -23,7 +23,7 @@ class TestStack(unittest.TestCase):
         self.assertEqual(result, None)
 
     def test_pop_with_one_item(self):
-        mystack = create_stack('Python0')
+        mystack = create_stack(['Python0'])
         result = mystack.pop()
         self.assertEqual(result, 'Python0')
         self.assertEqual(mystack.count(), 0)
