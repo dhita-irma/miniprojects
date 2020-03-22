@@ -42,7 +42,7 @@ class LinkedList:
             while current.next.next:  # Find second to last element
                 current = current.next
 
-            value = current.value
+            value = current.next.value
             current.next = None
             self.tail = current
             self.count -= 1
