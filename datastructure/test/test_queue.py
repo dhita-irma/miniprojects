@@ -46,6 +46,16 @@ class TestQueue(unittest.TestCase):
         self.assertEqual(myqueue.get_size(), 0)
         self.assertEqual(myqueue.peek(), None)
 
+    def test_peek_with_itmes(self):
+        myqueue = create_queue(["Python0", "Python1", "Python2"])
+        result = myqueue.peek()
+        self.assertEqual(result, 'Python0')
+
+    def test_peek_empty(self):
+        myqueue = Queue()
+        result = myqueue.peek()
+        self.assertEqual(result, None)
+
     def test_get_size_with_items(self):
         myqueue = create_queue(["Python0", "Python1", "Python2"])
         self.assertEqual(myqueue.get_size(), 3)
