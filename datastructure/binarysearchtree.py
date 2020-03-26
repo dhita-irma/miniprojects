@@ -42,25 +42,28 @@ class Node:
 
     def preorder(self):
         if self:
-            print(str(self.value))
+            items.append(self.value)
             if self.left:
                 self.left.preorder()
             if self.right:
                 self.right.preorder()
+        return items
 
     def postorder(self):
+        items = []
         if self:
             if self.left:
                 self.left.postorder()
             if self.right:
                 self.right.postorder()
-            print(str(self.value))
+            items.append(self.value)
+        return items
 
     def inorder(self):
-        if self:
+        if self.value:
             if self.left:
                 self.left.inorder()
-            print(str(self.value))
+            print(self.value)
             if self.right:
                 self.right.inorder()
 
@@ -103,16 +106,27 @@ class BinarySearchTree:
             return None
 
     def preorder(self):
-        print('PreOrder')
-        self.root.preorder()
+        """Transverse Root - Left - Right"""
+        # print('PreOrder')
+        return self.root.preorder()
 
     def postorder(self):
-        print('PostOrder')
-        self.root.postorder()
+        """Transverse """
+        # print('PostOrder')
+        return self.root.postorder()
 
     def inorder(self):
-        print('InOrder')
-        self.root.inorder()
+        """Transverse Left - Root - Right"""
+        # print('InOrder')
+        return self.root.inorder()
 
     def get_size(self):
         return self.count
+
+
+if __name__ == '__main__':
+    bst = BinarySearchTree()
+    items = [50, 30, 20, 40, 70, 60, 80]
+    for item in items:
+        bst.insert(item)
+    print(bst.inorder())
