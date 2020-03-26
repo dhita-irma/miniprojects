@@ -14,7 +14,8 @@ class TestBinarySearchTree(unittest.TestCase):
     def test_insert_empty(self):
         bst = BinarySearchTree()
         result = bst.insert(100)
-        self.assertEqual(result, True)
+        self.assertTrue(result)
+        self.assertTrue(bst.find(100))
         self.assertEqual(bst.root.value, 100)
         self.assertEqual(bst.count, 1)
 
@@ -24,30 +25,40 @@ class TestBinarySearchTree(unittest.TestCase):
         bst.insert(95)
         bst.insert(150)
         result = bst.insert(125)
-        self.assertEqual(result, True)
+        self.assertTrue(result)
+        self.assertTrue(bst.find(125))
         self.assertEqual(bst.count, 4)
-        # TODO: test find 125
 
     def test_insert_item_duplicate(self):
         bst = BinarySearchTree()
         bst.insert(100)
         bst.insert(95)
         result = bst.insert(95)
-        self.assertEqual(result, False)
+        self.assertFalse(result)
         self.assertEqual(bst.root.value, 100)
         self.assertEqual(bst.count, 2)
 
+    # TODO: Test if user input something other than integer
+
+    def test_find_empty(self):
+        bst = BinarySearchTree()
+        self.assertFalse(bst.find(95))
+
+    def test_find_one_item(self):
+        bst = create_binary_tree([100])
+        self.assertTrue(bst.find(100))
+
     def test_find_exist(self):
         bst = create_binary_tree([100, 95, 150, 125])
-        self.assertEqual(bst.find(95), True)
+        self.assertTrue(bst.find(95))
 
     def test_find_does_not_exist(self):
         bst = create_binary_tree([100, 95, 150, 125])
-        self.assertEqual(bst.find(200), False)
+        self.assertFalse(bst.find(200))
 
     def test_delete_empty(self):
         bst = BinarySearchTree()
-        self.assertEqual(bst.delete(100), None)
+        self.assertFalse(bst.delete(100))
 
     # TREE FOR DELETE LEAF
     #                50
