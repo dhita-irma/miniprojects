@@ -64,7 +64,7 @@ class TestBinarySearchTree(unittest.TestCase):
     def test_inorder(self):
         bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
         result = bst.inorder()
-        self.assertEqual(result, [20, 30, 40, 50, 60, 70, 80])
+        self.assertEqual(result, "20 30 40 50 60 70 80")
 
     def test_postorder(self):
         bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
