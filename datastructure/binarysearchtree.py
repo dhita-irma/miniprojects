@@ -60,10 +60,10 @@ class Node:
         return items
 
     def inorder(self):
-        if self.value:
+        if self:
             if self.left:
                 self.left.inorder()
-            print(self.value)
+            print(self.value, end=" ")
             if self.right:
                 self.right.inorder()
 
@@ -129,4 +129,4 @@ if __name__ == '__main__':
     items = [50, 30, 20, 40, 70, 60, 80]
     for item in items:
         bst.insert(item)
-    print(bst.inorder())
+    bst.inorder()
