@@ -34,45 +34,15 @@ class Node:
             else:
                 return False
 
-    def delete(self, value):
-        if self.find(value):
-            pass  # TODO
-        else:
-            return False
-
-    def preorder(self):
-        if self:
-            items.append(self.value)
-            if self.left:
-                self.left.preorder()
-            if self.right:
-                self.right.preorder()
-        return items
-
-    def postorder(self):
-        items = []
-        if self:
-            if self.left:
-                self.left.postorder()
-            if self.right:
-                self.right.postorder()
-            items.append(self.value)
-        return items
-
-    def inorder(self):
-        if self:
-            if self.left:
-                self.left.inorder()
-            print(self.value, end=" ")
-            if self.right:
-                self.right.inorder()
-
 
 class BinarySearchTree:
 
     def __init__(self):
         self.root = None
         self.count = 0
+
+    def __insert(self, current_node, value):
+        pass
 
     def insert(self, value):
         """Add a node to a BST. Return True if value inserted,
@@ -105,28 +75,50 @@ class BinarySearchTree:
         else:
             return None
 
+    def __preorder(self, current_node, item_list):
+        item_list.append(current_node.value)
+        if current_node.left:
+            self.__preorder(current_node.left, item_list)
+        if current_node.right:
+            self.__preorder(current_node.right, item_list)
+        return item_list
+
     def preorder(self):
-        """Transverse Root - Left - Right"""
-        # print('PreOrder')
-        return self.root.preorder()
+        """Traverse Root - Left - Right"""
+        if self.root:
+            return self.__preorder(self.root, [])
+        else:
+            return []
+
+    def __postorder(self, current_node, item_list):
+        if current_node.left:
+            self.__postorder(current_node.left, item_list)
+        if current_node.right:
+            self.__postorder(current_node.right, item_list)
+        item_list.append(current_node.value)
+        return item_list
 
     def postorder(self):
-        """Transverse """
-        # print('PostOrder')
-        return self.root.postorder()
+        """Traverse Left - Right - Root"""
+        if self.root:
+            return self.__postorder(self.root, [])
+        else:
+            return []
+
+    def __inorder(self, current_node, item_list):
+        if current_node.left:
+            self.__inorder(current_node.left, item_list)
+        item_list.append(current_node.value)
+        if current_node.right:
+            self.__inorder(current_node.right, item_list)
+        return item_list
 
     def inorder(self):
-        """Transverse Left - Root - Right"""
-        # print('InOrder')
-        return self.root.inorder()
+        """Traverse Left - Root - Right"""
+        if self.root:
+            return self.__inorder(self.root, [])
+        else:
+            return []
 
     def get_size(self):
         return self.count
-
-
-if __name__ == '__main__':
-    bst = BinarySearchTree()
-    items = [50, 30, 20, 40, 70, 60, 80]
-    for item in items:
-        bst.insert(item)
-    bst.inorder()
