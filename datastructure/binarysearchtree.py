@@ -118,3 +118,18 @@ class BinarySearchTree:
 
     def get_size(self):
         return self.count
+
+    def __isvalid(self, current_node):
+        if not current_node:  # This is the base case
+            return True
+        elif current_node.left and current_node.value <= current_node.left.value:  # check if this is not a valid node
+            return False
+        elif current_node.right and current_node.value >= current_node.right.value:  # check if this is not a valid node
+            return False
+        return self.__isvalid(current_node.left) and self.__isvalid(current_node.right)  # This is the recursive case
+
+    def is_valid(self):
+        if self.root:
+            return self.__isvalid(self.root)
+        else:
+            return False
