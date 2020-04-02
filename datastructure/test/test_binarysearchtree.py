@@ -64,12 +64,12 @@ class TestBinarySearchTree(unittest.TestCase):
     def test_inorder(self):
         bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
         result = bst.inorder()
-        self.assertEqual(result, "20 30 40 50 60 70 80")
+        self.assertEqual(result, [20, 30, 40, 50, 60, 70, 80])
 
     def test_postorder(self):
         bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
         result = bst.postorder()
-        # TODO: post order test
+        self.assertEqual(result, [20, 40, 30, 60, 80, 70, 50])
 
     def test_delete_empty(self):
         bst = BinarySearchTree()
@@ -123,3 +123,11 @@ class TestBinarySearchTree(unittest.TestCase):
     def test_get_size_with_items(self):
         bst = create_binary_tree([100, 95, 150, 125])
         self.assertEqual(bst.get_size(), 4)
+
+    def test_is_valid_empty(self):
+        bst = BinarySearchTree()
+        self.assertFalse(bst.is_valid())
+
+    def test_is_valid_with_items(self):
+        bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
+        self.assertTrue(bst.is_valid())
