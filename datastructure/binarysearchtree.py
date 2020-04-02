@@ -4,36 +4,6 @@ class Node:
         self.right = None
         self.left = None
 
-    def insert(self, value):
-        if value == self.value:
-            return False
-        elif value < self.value:
-            if self.left:
-                return self.left.insert(value)
-            else:
-                self.left = Node(value)
-                return True
-        else:
-            if self.right:
-                return self.right.insert(value)
-            else:
-                self.right = Node(value)
-                return True
-
-    def find(self, value):
-        if value == self.value:
-            return True
-        elif value < self.value:
-            if self.left:
-                return self.left.find(value)
-            else:
-                return False
-        else:
-            if self.right:
-                return self.right.find(value)
-            else:
-                return False
-
 
 class BinarySearchTree:
 
@@ -42,13 +12,25 @@ class BinarySearchTree:
         self.count = 0
 
     def __insert(self, current_node, value):
-        pass
+        if value == current_node.value:
+            return False  # Cannot insert duplicate
+        elif value < current_node.value:
+            if current_node.left:
+                return self.__insert(current_node.left, value)
+            else:
+                current_node.left = Node(value)
+        else:
+            if current_node.right:
+                return self.__insert(current_node.right, value)
+            else:
+                current_node.right = Node(value)
+        return True
 
     def insert(self, value):
         """Add a node to a BST. Return True if value inserted,
             otherwise, return False"""
         if self.root:
-            insertion = self.root.insert(value)
+            insertion = self.__insert(self.root, value)
             if insertion:
                 self.count += 1
             return insertion
@@ -57,13 +39,27 @@ class BinarySearchTree:
             self.count += 1
             return True
 
+    def __find(self, current_node, value):
+        if value == current_node.value:
+            return True
+        elif value < current_node.value:
+            if current_node.left:
+                return self.__find(current_node.left, value)
+        else:
+            if current_node.right:
+                return self.__find(current_node.right, value)
+        return False
+
     def find(self, value):
         """Find a value in the tree, return True if value exist.
            Otherwise, return False."""
         if self.root:
-            return self.root.find(value)
+            return self.__find(self.root, value)
         else:
             return False
+
+    def __delete(self):
+        pass
 
     def delete(self, value):
         """Delete a node containing value in a tree"""
