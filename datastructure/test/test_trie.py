@@ -13,9 +13,9 @@ class TestTrie(unittest.TestCase):
 
     def test_add_empty(self):
         mytrie = Trie()
-        result = mytrie.insert("hello")
-        self.assertTrue(result)
+        mytrie.insert("hello")
         self.assertTrue(mytrie.find("hello"))
+        self.assertFalse(mytrie.find("hell"))
 
     def test_add_with_words(self):
         mytrie = Trie()
@@ -25,17 +25,17 @@ class TestTrie(unittest.TestCase):
         mytrie.insert("worlds")
         self.assertTrue(mytrie.find("worlds"))
 
-    def find_with_empty(self):
+    def test_find_with_empty(self):
         mytrie = Trie()
         result = mytrie.find("hey")
         self.assertFalse(result)
 
-    def find_with_words(self):
+    def test_find_with_words(self):
         mytrie = create_trie(["hello", "hi", "hey"])
         result = mytrie.find("hey")
         self.assertTrue(result)
 
-    def find_does_not_exist(self):
+    def test_find_does_not_exist(self):
         mytrie = create_trie(["hello", "hi", "hey"])
         result = mytrie.find("world")
         self.assertFalse(result)
