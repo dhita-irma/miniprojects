@@ -147,3 +147,21 @@ class TestBinarySearchTree(unittest.TestCase):
     def test_is_valid_with_items(self):
         bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
         self.assertTrue(bst.is_valid())
+
+    def test_min_value(self):
+        bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
+        result = bst.min_value()
+        self.assertTrue(result, 20)
+
+    def test_min_value_empty(self):
+        bst = BinarySearchTree()
+        self.assertEqual(bst.min_value(), None)
+
+    def test_max_value(self):
+        bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
+        result = bst.max_value()
+        self.assertTrue(result, 80)
+
+    def test_max_value_empty(self):
+        bst = BinarySearchTree()
+        self.assertEqual(bst.max_value(), None)
