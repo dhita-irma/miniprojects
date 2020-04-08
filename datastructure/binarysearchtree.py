@@ -58,18 +58,41 @@ class BinarySearchTree:
         else:
             return False
 
-    def __delete(self):
-        pass
+    def __delete(self, current_node, value):
+        """Returns a a new subtree in which the node of 'value' is deleted.
+            Current_node may or may not change, depend on which node is deleted"""
+        if not current_node:  # If current_node is None
+            return current_node
+        if current_node.value == value:
+            if not current_node.right:  # Current_node has only left child or no child
+                return current_node.left
+            elif not current_node.left:  # Current_node has only right child or no child
+                return current_node.right
+            else:  # current_node has two children
+                successor = self.__inorder_successor(current_node)
+                current_node.value = successor.value
+                current_node.right = self.__delete(current_node.right, current_node.value)
+        elif value < current_node.value:
+            current_node.left = self.__delete(current_node.left, value)
+        else:  # Value > current_node.value
+            current_node.right = self.__delete(current_node.right, value)
+        return current_node
+
+    def __inorder_successor(self, current_node):
+        """Return a new node in a subtree that is greater than current_node (root) and
+            smaller than everything else"""
+        current_node = current_node.right
+        while current_node.left:
+            current_node = current_node.left
+        return current_node
 
     def delete(self, value):
         """Delete a node containing value in a tree"""
-        if self.root:
-            deletion = self.delete(value)
-            if deletion:
-                self.count -= 1
-            return deletion
-        else:
-            return None
+        if self.root and self.find(value):
+            self.__delete(self.root, value)
+            self.count -= 1
+            return True
+        return False
 
     def __preorder(self, current_node, item_list):
         item_list.append(current_node.value)
@@ -132,4 +155,4 @@ class BinarySearchTree:
         if self.root:
             return self.__isvalid(self.root)
         else:
-            return False
+            return True
