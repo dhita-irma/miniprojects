@@ -31,7 +31,6 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(bst.count, 4)
         self.assertTrue(bst.is_valid())
 
-
     def test_insert_item_duplicate(self):
         bst = BinarySearchTree()
         bst.insert(100)
@@ -41,8 +40,6 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(bst.root.value, 100)
         self.assertEqual(bst.count, 2)
         self.assertTrue(bst.is_valid())
-
-    # TODO: Test if user input something other than integer
 
     def test_find_empty(self):
         bst = BinarySearchTree()
@@ -79,7 +76,6 @@ class TestBinarySearchTree(unittest.TestCase):
         bst = BinarySearchTree()
         self.assertFalse(bst.delete(100))
         self.assertTrue(bst.is_valid())
-        self.assertTrue(bst.is_valid())
 
     # TREE FOR DELETE LEAF
     #                50
@@ -92,7 +88,7 @@ class TestBinarySearchTree(unittest.TestCase):
         bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
         bst.delete(20)
         self.assertEqual(bst.count, 6)
-        self.assertEqual(bst.root, 50)
+        self.assertFalse(bst.find(20))
         self.assertTrue(bst.is_valid())
 
     # TREE FOR DELETE NODE THAT HAS ONLY ONE CHILD
@@ -106,14 +102,14 @@ class TestBinarySearchTree(unittest.TestCase):
         bst = create_binary_tree([50, 30, 40, 70, 60, 80])
         bst.delete(30)
         self.assertEqual(bst.count, 5)
-        self.assertEqual(bst.root, 50)
+        self.assertFalse(bst.find(30))
         self.assertTrue(bst.find(40))
         self.assertTrue(bst.is_valid())
 
     # TREE FOR DELETE NODE THAT HAS TWO CHILDREN
     #                50
-    #             /      \
-    #            30      70
+    #              /     \
+    #             40     70
     #                   /  \
     #                  60   80
 
@@ -121,8 +117,19 @@ class TestBinarySearchTree(unittest.TestCase):
         bst = create_binary_tree([50, 40, 70, 60, 80])
         bst.delete(70)
         self.assertEqual(bst.count, 4)
-        self.assertEqual(bst.root, 50)
-        self.assertTrue(bst.find(40))
+        self.assertFalse(bst.find(70))
+        self.assertTrue(bst.find(60))
+        self.assertTrue(bst.find(80))
+        self.assertTrue(bst.is_valid())
+
+    def test_delete_node_that_is_a_root(self):
+        bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
+        bst.delete(50)
+        self.assertEqual(bst.count, 6)
+        self.assertEqual(bst.root.value, 60)
+        self.assertFalse(bst.find(50))
+        self.assertTrue(bst.find(30))
+        self.assertTrue(bst.find(80))
         self.assertTrue(bst.is_valid())
 
     def test_get_size_empty(self):
@@ -135,7 +142,7 @@ class TestBinarySearchTree(unittest.TestCase):
 
     def test_is_valid_empty(self):
         bst = BinarySearchTree()
-        self.assertFalse(bst.is_valid())
+        self.assertTrue(bst.is_valid())
 
     def test_is_valid_with_items(self):
         bst = create_binary_tree([50, 30, 20, 40, 70, 60, 80])
