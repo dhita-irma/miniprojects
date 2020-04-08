@@ -156,3 +156,21 @@ class BinarySearchTree:
             return self.__isvalid(self.root)
         else:
             return True
+
+    def min_value(self):
+        if self.root:
+            current_node = self.root
+            if current_node.left:
+                current_node = current_node.left
+            return current_node.value
+        else:
+            return None
+
+    def max_value(self):
+        if self.root:
+            current_node = self.root
+            if current_node.right:
+                current_node = current_node.right
+            return current_node.value
+        else:
+            return None
