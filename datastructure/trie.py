@@ -1,3 +1,5 @@
+from datastructure.stack import Stack
+
 class Node:
     def __init__(self, char):
         self.char = char
@@ -31,10 +33,26 @@ class Trie:
         else:
             return False
 
-    def __delete(self, current, word):
-        pass
-
     def delete(self, word):
-        if self.root and self.find(word):
-            return self.__delete(self.root, word)
-        return None
+        # If tree is empty
+        if not self.root:
+            return None
+
+        # If trie is not empty
+        current = self.root
+        node_stack = Stack()
+        for char in word:
+            if char not in current.children:
+                return False
+            current = current.children[char]
+            node_stack.push(current)
+
+        if current.is_end:
+            for i in range(node_stack.count()):
+                current = node_stack.pop()
+                prev = node_stack.peek()
+                if not current.children:
+                    del prev.children[current.char]
+            return True
+        else:
+            return False
