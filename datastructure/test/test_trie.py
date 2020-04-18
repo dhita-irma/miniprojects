@@ -58,6 +58,18 @@ class TestTrie(unittest.TestCase):
         self.assertTrue(result)
         self.assertFalse(mytrie.find("hey"))
 
+    def test_delete_unique_key(self):
+        mytrie = create_trie(["hello", "hi", "world"])
+        result = mytrie.delete("world")
+        self.assertTrue(result)
+        self.assertFalse(mytrie.find("world"))
+
+    def test_delete_key_that_is_a_prefix_to_another_key(self):
+        mytrie = create_trie(["watch", "watching", "read", "reading"])
+        result = mytrie.delete("read")
+        self.assertTrue(result)
+        self.assertFalse(mytrie.find("read"))
+
     def test_delete_word_does_not_exist(self):
         mytrie = create_trie(["hello", "hi"])
         result = mytrie.delete("hey")
