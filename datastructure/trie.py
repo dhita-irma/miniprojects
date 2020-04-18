@@ -39,6 +39,7 @@ class Trie:
             return None
 
         # If trie is not empty
+        # Put the nodes in a stack
         current = self.root
         node_stack = Stack()
         for char in word:
@@ -47,11 +48,13 @@ class Trie:
             current = current.children[char]
             node_stack.push(current)
 
+        # Delete node from the end of key if node does not have children
         if current.is_end:
+            current.is_end = False
             for i in range(node_stack.count()):
                 current = node_stack.pop()
                 prev = node_stack.peek()
-                if not current.children:
+                if not current.children and prev:
                     del prev.children[current.char]
             return True
         else:
