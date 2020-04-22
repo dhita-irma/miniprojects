@@ -57,6 +57,8 @@ class TestTrie(unittest.TestCase):
         result = mytrie.delete("hey")
         self.assertTrue(result)
         self.assertFalse(mytrie.find("hey"))
+        self.assertTrue(mytrie.find("hello"))
+        self.assertTrue(mytrie.find("hi"))
 
     def test_delete_unique_key(self):
         mytrie = create_trie(["hello", "hi", "world"])
