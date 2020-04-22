@@ -1,5 +1,6 @@
 from datastructure.stack import Stack
 
+
 class Node:
     def __init__(self, char):
         self.char = char
