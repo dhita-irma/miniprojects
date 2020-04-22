@@ -158,19 +158,21 @@ class BinarySearchTree:
             return True
 
     def min_value(self):
-        if self.root:
-            current_node = self.root
-            if current_node.left:
-                current_node = current_node.left
-            return current_node.value
-        else:
+        """Return the smallest value in a BST. Return None if BST is empty."""
+        if not self.root:
             return None
 
+        current_node = self.root
+        while current_node.left:
+            current_node = current_node.left
+        return current_node.value
+
     def max_value(self):
-        if self.root:
-            current_node = self.root
-            if current_node.right:
-                current_node = current_node.right
-            return current_node.value
-        else:
+        """Return the biggest value in a BST. Return None if BST is empty."""
+        if not self.root:
             return None
+
+        current_node = self.root
+        while current_node.right:
+            current_node = current_node.right
+        return current_node.value
