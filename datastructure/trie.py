@@ -60,3 +60,11 @@ class Trie:
             if not current.children and prev:
                 del prev.children[current.char]
         return True
+
+    def contains_prefix(self, prefix):
+        "Returns True as long as the prefix exist in the Trie"
+        pass
+
+    def get_words_with_prefix(self, prefix):
+        "Returns words in the Trie that starts ith the prefix"
+        pass
