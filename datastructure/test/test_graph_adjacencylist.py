@@ -1,5 +1,5 @@
 import unittest
-from datastructure.graphlist import Vertex, Graph
+from datastructure.graph_adjacencylist import Vertex, Graph
 
 
 class TestGraphlist(unittest.TestCase):
