@@ -35,7 +35,7 @@ class Trie:
             return False
 
     def delete(self, word):
-        # If tree is empty
+
         if not self.root:
             return False
 
@@ -104,8 +104,6 @@ class Trie:
 
     def get_words_with_prefix(self, prefix):
         """"Returns  a list of words in the Trie that starts with the prefix"""
-        # TODO If Prefix does not exist, should I return None, False, or Empty List []?
-        # TODO naming convention: should I use underscore or camel case?
 
         # Traverse the path to get to the last character node
         # Set "current" to be the last character node

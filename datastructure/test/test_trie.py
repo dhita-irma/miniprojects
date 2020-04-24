@@ -110,4 +110,4 @@ class TestTrie(unittest.TestCase):
     def test_get_words_with_prefix_empty(self):
         mytrie = Trie()
         result = mytrie.get_words_with_prefix("wat")
-        self.assertEqual(result, False)
+        self.assertFalse(result)
