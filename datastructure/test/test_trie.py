@@ -96,3 +96,18 @@ class TestTrie(unittest.TestCase):
         mytrie = Trie()
         result = mytrie.contains_prefix("cook")
         self.assertFalse(result)
+
+    def test_get_words_with_prefix_exists(self):
+        mytrie = create_trie(["watch", "watching", "watcher", "read", "reading", "reader"])
+        result = mytrie.get_words_with_prefix("wat")
+        self.assertEqual(result, ["watch", "watching", "watcher"])
+
+    def test_get_words_with_prefix_does_not_exist(self):
+        mytrie = create_trie(["watch", "watching", "watcher", "read", "reading", "reader"])
+        result = mytrie.get_words_with_prefix("cook")
+        self.assertFalse(result)
+
+    def test_get_words_with_prefix_empty(self):
+        mytrie = Trie()
+        result = mytrie.get_words_with_prefix("wat")
+        self.assertEqual(result, False)
