@@ -12,7 +12,7 @@ def to_str(n, base):
             rStack.push(convert_string[n % base])
         n = n // base
     result = ""
-    while rStack:
+    while not rStack.is_empty():
         result = result + str(rStack.pop())
     return result
 
@@ -20,3 +20,4 @@ def to_str(n, base):
 if __name__ == '__main__':
 
     print(to_str(1453, 16))
+    print(to_str(10, 2))
