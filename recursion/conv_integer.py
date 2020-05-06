@@ -1,12 +1,22 @@
-def to_string(n, base):
-    str_num = "0123456789ABCDEF"
+from datastructure.stack import Stack
 
-    if n < base:
-        return str_num[n]
-    else:
-        return to_string(n//base, base) + str_num[n % base]
+rStack = Stack()
+
+
+def to_str(n, base):
+    convert_string = "0123456789ABCDEF"
+    while n > 0:
+        if n < base:
+            rStack.push(convert_string[n])
+        else:
+            rStack.push(convert_string[n % base])
+        n = n // base
+    result = ""
+    while rStack:
+        result = result + str(rStack.pop())
+    return result
 
 
 if __name__ == '__main__':
-    print(to_string(28, 10))
-    print(to_string(10, 2))
+
+    print(to_str(1453, 16))
