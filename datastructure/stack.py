@@ -29,6 +29,13 @@ class Stack:
         else:
             return None
 
+    def is_empty(self):
+        """Return True if Stack is empty, otherwise return False"""
+        if len(self.stack) == 0:
+            return True
+        else:
+            return False
+
     def __str__(self):
         """Print all the items in the stack"""
         return str(self.stack)
