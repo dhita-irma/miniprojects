@@ -57,3 +57,12 @@ class TestStack(unittest.TestCase):
         mystack.clear()
         self.assertEqual(mystack.count(), 0)
         self.assertEqual(mystack.peek(), None)
+
+    def test_is_empty_with_empty(self):
+        mystack = Stack()
+        self.assertTrue(mystack.is_empty())
+
+    def test_is_empty_with_items(self):
+        mystack = create_stack(['Python0'])
+        result = mystack.is_empty()
+        self.assertEqual(result, False)
